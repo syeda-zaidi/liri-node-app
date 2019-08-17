@@ -1,10 +1,12 @@
+require("dotenv").config();
 var keys = require("./keys.js");
+var axios = require('axios');
 
-var axios = require("axios");
 
 var movie = process.argv[2]; 
-var queryURL = "https://www.omdbapi.com/?t=" + movie + "&apikey=" + keys.omdbkey.omdbkey;
+var queryURL = "https://www.omdbapi.com/?apikey=" + keys.omdb.key + "&t=" + movie;
 axios.get(queryURL).then( (response) => {
+    // console.log(response)
     console.log("\n----------\n");
     console.log("Movie Title : " + response.data.Title);
     console.log("Year : "+ response.data.Year);
@@ -16,4 +18,3 @@ axios.get(queryURL).then( (response) => {
     console.log(err);
 })
 
-console.log(keys.omdbkey.omdbkey);
