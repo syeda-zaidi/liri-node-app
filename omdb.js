@@ -2,6 +2,10 @@ require("dotenv").config();
 var keys = require("./keys.js");
 var axios = require('axios');
 
+function movies(inputMovie) {
+    var movie = inputMovie;
+    
+}
 
 var movie = process.argv[2]; 
 var queryURL = "https://www.omdbapi.com/?apikey=" + keys.omdb.key + "&t=" + movie;
