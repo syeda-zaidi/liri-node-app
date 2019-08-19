@@ -27,7 +27,7 @@ movieThis = () => {
     console.log("Looks like you didn't enter a movie to search");
     console.log("\n--- Let me suggest one --- \n");
     console.log("If you haven't watched \"Mr. Nobody\", then you should:");
-    console.log("http://www.imdb.com/title/tt0485947/");
+    console.log("http://www.imdb.com/title/tt0585957/");
     console.log("It's on Netflix!");
 
   } else {
@@ -55,7 +55,7 @@ concertThis = () => {
   axios.get(BandsInTownURL).then((response) => {
     var results = response.data
     if (results.length === 0) {
-      console.log("well, " + inputSearch + " is not performing anytime soon. Try a different artist")
+      console.log("well, looks like " + inputSearch + " is not performing anytime soon. Try a different artist")
     } else {
       console.log("\nUpcoming Shows For: " + inputSearch + "\n");
       for (var i = 0; i < 10; i++) {
@@ -80,6 +80,14 @@ spotifythis = () => {
       if (err) {
         return console.log(err);
       }
+
+      console.log("\nYou didn't enter a song to search");
+      console.log("\n --- here's a suggestion you might like --- \n");
+      console.log("Artist Name : " + data.tracks.items[4].artists[0].name)
+      console.log("Song Title : " + data.tracks.items[4].name)
+      console.log("Song preview url : " + data.tracks.items[4].preview_url);
+      console.log("Album name : " + data.tracks.items[4].album.name);
+      console.log("\n--------------\n");
     })
   } else {
     spotify.search({ type: "track", query: inputSearch }, function (err, data) {
@@ -87,14 +95,13 @@ spotifythis = () => {
         return console.log("error occurred: " + err);
       }
 
-      console.log("\n-------SONG INFO-------\n");
-      for (var i = 0; i < 3; i++) {
+      console.log("\n------- THE TOP 5 SONGS INFO -------\n");
+      for (var i = 0; i < 5; i++) {
         console.log("Artist Name : " + data.tracks.items[i].artists[0].name)
         console.log("Song Title : " + data.tracks.items[i].name)
         console.log("Song preview url : " + data.tracks.items[i].preview_url);
         console.log("Album name : " + data.tracks.items[i].album.name);
         console.log("\n--------------\n");
-        // console.log(data.tracks);
       }
     });
   }
@@ -103,11 +110,9 @@ spotifythis = () => {
 runLIRI = () => {
 
   if (inputCommand === "movie-this") {
-    // if (inputSearch) {
+    
     movieThis();
-    // } else {
-    //   console.log("please enter movie title to make a search ")
-    // }
+   
   } else if (inputCommand === "concert-this") {
     if (inputSearch) {
       concertThis();
@@ -115,11 +120,9 @@ runLIRI = () => {
       console.log("Enter an artist to find where they're performing next!");
     }
   } else if (inputCommand === "spotify-this-song") {
-    if (inputSearch) {
+
       spotifythis();
-    } else {
-      console.log("Enter a song to make the search")
-    }
+ 
   }
 };
 
