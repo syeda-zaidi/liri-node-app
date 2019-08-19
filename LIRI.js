@@ -66,15 +66,13 @@ concertThis = () => {
         console.log("-----------------------------")
       }
     }
+  }).catch(function (error) {
+    if (error.response) {
+    }
   })
-    .catch(function (error) {
-      if (error.response) {
-      }
-    })
 }
 
 spotifythis = () => {
-
   if (inputSearch === "") {
     spotify.search({ type: "track", query: "The Sign" }, function (err, data) {
       if (err) {
@@ -128,7 +126,6 @@ doWhatItSays = () => {
         })
       }
     }
-
   })
 };
 
@@ -145,6 +142,7 @@ runLIRI = () => {
     } else {
       console.log("Enter an artist to find where they're performing next!");
     }
+
   } else if (inputCommand === "spotify-this-song") {
 
     spotifythis();
