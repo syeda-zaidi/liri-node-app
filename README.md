@@ -26,5 +26,9 @@ Built with : Javascript and node
 
 **Deployed version of app :** (https://syeda-zaidi.github.io/liri-node-app/)
 
+**Developer :** Syeda H. Zaidi 
+
+
+
 
 
