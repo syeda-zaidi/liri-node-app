@@ -24,7 +24,7 @@ var inputSearch = process.argv.slice(3).join(" ");
 movieThis = () => {
   if (inputSearch === "") {
 
-    console.log("Looks like you didn't enter a movie to search");
+    console.log("\nLooks like you didn't enter a movie to search");
     console.log("\n--- Let me suggest one --- \n");
     console.log("If you haven't watched \"Mr. Nobody\", then you should:");
     console.log("http://www.imdb.com/title/tt0585957/");
@@ -107,12 +107,38 @@ spotifythis = () => {
   }
 };
 
+doWhatItSays = () => {
+  fs.readFile("random.txt", "utf8", function (err, data) {
+    if (err) {
+      console.log(err);
+    } else {
+      var txtArray = data.split(",");
+      if (txtArray[0] === "spotify-this-song") {
+        spotify.search({ type: "track", query: txtArray[1] }, function (err, data) {
+          if (err) {
+            console.log(err);
+          } else {
+            console.log("\n--- checkout this song ---\n");
+            console.log("Artist Name : " + data.tracks.items[0].artists[0].name)
+            console.log("Song Title : " + data.tracks.items[0].name)
+            console.log("Song preview url : " + data.tracks.items[0].preview_url);
+            console.log("Album name : " + data.tracks.items[0].album.name);
+            console.log("\n--------------\n");
+          }
+        })
+      }
+    }
+
+  })
+};
+
+
 runLIRI = () => {
 
   if (inputCommand === "movie-this") {
-    
+
     movieThis();
-   
+
   } else if (inputCommand === "concert-this") {
     if (inputSearch) {
       concertThis();
@@ -121,8 +147,10 @@ runLIRI = () => {
     }
   } else if (inputCommand === "spotify-this-song") {
 
-      spotifythis();
- 
+    spotifythis();
+
+  } else if (inputCommand === "do-what-it-says") {
+    doWhatItSays();
   }
 };
 
