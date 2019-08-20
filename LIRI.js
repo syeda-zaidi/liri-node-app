@@ -131,8 +131,15 @@ doWhatItSays = () => {
 
 
 runLIRI = () => {
+  if (!inputCommand) {
 
-  if (inputCommand === "movie-this") {
+    console.log("\nTo make a search enter one of the following commands");
+    console.log("\n node LIRI.js movie-this \"Movie Title\" ");
+    console.log("\n node LIRI.js concert-this \"Artist name\" ");
+    console.log("\n node LIRI.js spotify-this-song \"Song Title\" ");
+    console.log("\n node LIRI.js do-what-it-says");
+
+  } else if (inputCommand === "movie-this") {
 
     movieThis();
 
